@@ -1,9 +1,25 @@
-import React from 'react'
-import 'bootstrap/dist/css/bootstrap.min.css'
-import 'bootstrap-icons/font/bootstrap-icons.css'
-import 'bootstrap/dist/js/bootstrap.bundle.min.js'
+import React from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
+// Import specific Bootstrap components if needed
+// Example: import { Button, Container, Row, Col } from 'bootstrap';
 
-function Service(){
+const ServiceItem = ({ iconClass, title, description }) => (
+  <div className="col-md-6 col-lg-4 mb-4">
+    <div className="class-item shadow-sm p-4 rounded bg-white">
+      <div className={`icon my-3 text-danger fs-2 ${iconClass}`}></div>
+      <h3 className="fs-5 py-2">{title}</h3>
+      <p className="text-muted">{description}</p>
+    </div>
+  </div>
+);
+
+function Service (){
+  const services = [
+    { iconClass: 'fas fa-code', title: 'Desenvolvedor Web', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' },
+    { iconClass: 'fas fa-pencil-ruler', title: 'Analista de Sistemas', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' },
+    { iconClass: 'fas fa-project-diagram', title: 'Gestão de Projetos', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' },
+  ];
+
   return (
     <section className="services py-5" id="servico">
       <div className="container-lg py-4">
@@ -15,44 +31,18 @@ function Service(){
           </div>
         </div>
         <div className="row text-center">
-          <div className="col-md-6 col-lg-4 mb-4">
-            <div className="class-item shadow-sm p-4 rounded bg-white">
-              <div className="icon my-3 text-danger fs-2">
-                <i className="fas fa-code"></i>
-              </div>
-              <h3 className="fs-5 py-2">Desenvolvedor Web</h3>
-              <p className="text-muted">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              </p>
-            </div>
-          </div>
-          <div className="col-md-6 col-lg-4 mb-4">
-            <div className="class-item shadow-sm p-4 rounded bg-white">
-              <div className="icon my-3 text-danger fs-2">
-                <i className="fas fa-pencil-ruler"></i>
-              </div>
-              <h3 className="fs-5 py-2">Analista de Sistemas</h3>
-              <p className="text-muted">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              </p>
-            </div>
-          </div>
-          <div className="col-md-6 col-lg-4 mb-4">
-            <div className="class-item shadow-sm p-4 rounded bg-white">
-              <div className="icon my-3 text-danger fs-2">
-                <i className="fas fa-project-diagram"></i>
-              </div>
-              <h3 className="fs-5 py-2">Gestão de Projetos</h3>
-              <p className="text-muted">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              </p>
-            </div>
-          </div>
+          {services.map((service, index) => (
+            <ServiceItem 
+              key={index}
+              iconClass={service.iconClass}
+              title={service.title}
+              description={service.description}
+            />
+          ))}
         </div>
       </div>
     </section>
+  );
+};
 
-  )
-}
-
-export default Service
+export default Service;
