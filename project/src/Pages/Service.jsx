@@ -1,7 +1,5 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-// Import specific Bootstrap components if needed
-// Example: import { Button, Container, Row, Col } from 'bootstrap';
 
 const ServiceItem = ({ iconClass, title, description }) => (
   <div className="col-md-6 col-lg-4 mb-4">
