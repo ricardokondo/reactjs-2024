@@ -47,8 +47,8 @@ const SkillItem = ({ skill, value }) => (
   </div>
 );
 
-const SocialLink = ({ href, className }) => (
-  <a href={href} className="text-dark me-2">
+const SocialLink = ({ href, className, target}) => (
+  <a href={href} className="text-dark me-2" target={target}>
     <i className={className}></i>
   </a>
 );
@@ -77,7 +77,7 @@ function About() {
       <Container className="py-4">
         <Row className="justify-content-center">
           <Col lg={8}>
-            <SectionTitle title="Sobre Min" />
+            <SectionTitle title="Sobre Mim" />
           </Col>
         </Row>
         <Row>
@@ -92,9 +92,9 @@ function About() {
               <Col lg={12} className="d-flex align-items-center">
                 <Button href="/#" className="px-3 btn-danger me-5">Download CV</Button>
                 <div className="social-links">
-                  <SocialLink href="https://facebook.com/" className="fab fa-facebook-f" />
-                  <SocialLink href="https://www.linkedin.com/" className="fab fa-linkedin-in" />
-                  <SocialLink href="https://www.instagram.com" className="fab fa-instagram" />
+                  <SocialLink href="https://facebook.com/" className="bi bi-facebook" target="_blank"/>
+                  <SocialLink href="https://www.linkedin.com/" className="bi bi-linkedin" target="_blank" />
+                  <SocialLink href="https://www.instagram.com" className="bi bi-instagram" target="_blank" />
                 </div>
               </Col>
             </Row>

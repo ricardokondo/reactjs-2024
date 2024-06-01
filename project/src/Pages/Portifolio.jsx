@@ -2,6 +2,7 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+
 import img1 from '../img/portfolio/1.jpg';
 import img2 from '../img/portfolio/2.jpg';
 import img3 from '../img/portfolio/3.jpg';
