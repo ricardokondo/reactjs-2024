@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const ServiceItem = ({ iconClass, title, description }) => (
@@ -11,12 +11,23 @@ const ServiceItem = ({ iconClass, title, description }) => (
   </div>
 );
 
-function Service (){
-  const services = [
-    { iconClass: 'fas fa-code', title: 'Desenvolvedor Web', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' },
-    { iconClass: 'fas fa-pencil-ruler', title: 'Analista de Sistemas', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' },
-    { iconClass: 'fas fa-project-diagram', title: 'Gestão de Projetos', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' },
-  ];
+function Service() {
+  const [services, setServices] = useState([]);
+
+  useEffect(() => {
+    // Simulando uma chamada de API para buscar serviços
+    const fetchServices = async () => {
+      // Aqui você faria uma chamada real para uma API
+      const response = [
+        { iconClass: 'fas fa-code', title: 'Desenvolvedor Web', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' },
+        { iconClass: 'fas fa-pencil-ruler', title: 'Analista de Sistemas', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' },
+        { iconClass: 'fas fa-project-diagram', title: 'Gestão de Projetos', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' },
+      ];
+      setServices(response);
+    };
+
+    fetchServices();
+  }, []); // O array vazio como segundo argumento faz com que este efeito rode apenas uma vez, após o primeiro render
 
   return (
     <section className="services py-5" id="servico">
@@ -41,6 +52,6 @@ function Service (){
       </div>
     </section>
   );
-};
+}
 
 export default Service;

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Row, Col, Button } from 'react-bootstrap';
 import 'bootstrap-icons/font/bootstrap-icons.css';
@@ -54,23 +54,42 @@ const SocialLink = ({ href, className, target}) => (
 );
 
 function About() {
-    
-  const skills = [
-    { skill: 'HTML', value: 25 },
-    { skill: 'CSS', value: 30 },
-    { skill: 'JavaScript', value: 40 },
-    { skill: 'PHP', value: 45 },
-    { skill: 'Banco de Dados', value: 50 },
-    { skill: 'Gerência de Projetos', value: 80 },
-    { skill: 'Modelagem de Processos', value: 85 },
-    { skill: 'Engenharia de Requisitos', value: 90 },
-  ];
+  // skills é um array de objetos com a estrutura { skill: string, value: number }.
+  // No caso, são as habilidades do usuário que serão exibidas com uma barra de progresso.
+  const [skills, setSkills] = useState([]);
+  // facts é um array de objetos com a estrutura { number: number, description: string }. 
+  // No caso, são as informações que sobre a experiência do usuário que serão exibidas o anos de experiência e sua descrição.
+  const [facts, setFacts] = useState([]);
 
-  const facts = [
-    { number: 10, description: 'Anos de Experiência' },
-    { number: 5, description: 'Anos de Experiência Docência' },
-    { number: 8, description: 'Projetos Executados' },
-  ];
+  useEffect(() => {
+    // Simulando uma chamada de API para buscar skills e facts
+    const fetchSkillsAndFacts = async () => {
+      const fetchedSkills = [
+        { skill: 'HTML', value: 25 },
+        { skill: 'CSS', value: 30 },
+        { skill: 'JavaScript', value: 40 },
+        { skill: 'PHP', value: 45 },
+        { skill: 'Banco de Dados', value: 50 },
+        { skill: 'Gerência de Projetos', value: 80 },
+        { skill: 'Modelagem de Processos', value: 85 },
+        { skill: 'Engenharia de Requisitos', value: 90 },
+      ];
+
+      const fetchedFacts = [
+        { number: 10, description: 'Anos de Experiência' },
+        { number: 5, description: 'Anos de Experiência Docência' },
+        { number: 8, description: 'Projetos Executados' },
+      ];
+
+      // Simulando um atraso de 1 segundo
+      setTimeout(() => {
+        setSkills(fetchedSkills);
+        setFacts(fetchedFacts);
+      }, 10);
+    };
+
+    fetchSkillsAndFacts();
+  }, []);
 
   return (
     <section className="about py-5" id="sobre">
