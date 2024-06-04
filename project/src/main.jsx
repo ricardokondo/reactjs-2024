@@ -8,6 +8,7 @@ import Home from './routes/Home'
 import Contact from './routes/Contact'
 import ErrorPage from './routes/ErrorPage'
 import ContactDetails from './routes/ContactDetails'
+import Detail from './routes/Detail'
 
 // 1 - Configurando router
 import { 
@@ -69,6 +70,10 @@ const router = createBrowserRouter([
       {
         path: "oldcontact",
         element: <Navigate to="/contact " />,
+      },
+      {
+        path: "/detail",
+        element: <Detail/>,
       },
     ],
   },
