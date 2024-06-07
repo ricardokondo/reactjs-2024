@@ -27,6 +27,7 @@ function App() {
   const [autor, setAutor] = useState("");
   const [idPost, setIdPost] = useState("");
   const [idade, setIdade] = useState("");
+  const [altura, setAltura] = useState("");
 
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
@@ -49,6 +50,7 @@ function App() {
             titulo: doc.data().titulo,
             autor: doc.data().autor,
             idade: doc.data().idade,
+            altura: doc.data().altura,
           });
         });
 
@@ -100,12 +102,14 @@ function App() {
       titulo: titulo,
       autor: autor,
       idade: idade,
+      altura: altura,
     })
       .then(() => {
         console.log("Dados registrados no banco");
         setTitulo("");
         setAutor("");
         setIdade("");
+        setAltura("");
       })
       .catch((error) => {
         console.log("Gerou um erro ao adicionar" + error);
@@ -142,6 +146,7 @@ function App() {
             titulo: doc.data().titulo,
             autor: doc.data().autor,
             idade: doc.data().idade,
+            altura: doc.data().altura,
           });
         });
 
@@ -160,6 +165,7 @@ function App() {
       titulo: titulo,
       autor: autor,
       idade: idade,
+      altura: altura,
     })
       .then(() => {
         console.log("Dados atualizado");
@@ -167,6 +173,7 @@ function App() {
         setTitulo("");
         setAutor("");
         setIdade("");
+        setAltura("");
       })
       .catch((error) => {
         console.log("Gerou um erro ao adicionar" + error);
@@ -298,6 +305,13 @@ function App() {
           value={idade}
           onChange={(event) => setIdade(event.target.value)}
         />
+        <label>Altura: </label>
+        <textarea
+          type="text"
+          placeholder="Altura"
+          value={altura}
+          onChange={(event) => setAltura(event.target.value)}
+        />
         <button onClick={handleAdd}>Cadastrar</button>
         <button onClick={buscarPost}>Buscar post</button> <br />
         <button onClick={editarPost}>Atualizar post</button>
@@ -309,6 +323,7 @@ function App() {
                 <span>Titulo: {post.titulo} </span> <br />
                 <span>Autor: {post.autor}</span> <br />
                 <span>Idade: {post.idade}</span> <br />
+                <span>Altura: {post.altura}</span> <br />
                 <button onClick={() => excluirPost(post.id)}>
                   Excluir post
                 </button>{" "}
