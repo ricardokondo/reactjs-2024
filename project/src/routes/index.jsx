@@ -14,7 +14,6 @@ function RoutesApp() {
     <Routes>
       <Route path="/" element={<SignIn />} />
       <Route path="/register" element={<SignUp />} />
-
       <Route
         path="/dashboard"
         element={
