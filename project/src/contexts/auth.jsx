@@ -8,6 +8,15 @@ import { toast } from 'react-toastify'
 
 export const AuthContext = createContext({});
 
+
+/* Esta função AuthProvider é um componente que irá envolver toda a aplicação 
+para que todos os componentes tenham acesso ao contexto de autenticação.
+Ou seja, todos os componentes terão acesso a informações de autenticação, como 
+usuário logado, funções de login, cadastro e logout, e informações de loading.
+
+Passamos children como parâmetro para que todos os componentes filhos tenham acesso
+ao contexto de autenticação 
+*/
 function AuthProvider({ children }){
   const [user, setUser] = useState(null)
   const [loadingAuth, setLoadingAuth] = useState(false);
@@ -15,8 +24,10 @@ function AuthProvider({ children }){
 
   const navigate = useNavigate();
 
-
+  // Verificar se o usuário está logado ao carregar a página 
   useEffect(() => {
+    // Função para verificar se o usuário está logado, para isso é verificado se
+    // existe um usuário no localStorage 
     async function loadUser(){
       const storageUser = localStorage.getItem('@ticketsPRO')
 
@@ -24,26 +35,24 @@ function AuthProvider({ children }){
         setUser(JSON.parse(storageUser))
         setLoading(false);
       }
-
-
       setLoading(false);
-
     }
 
     loadUser();
   }, [])
 
-
+  // Função para realizar o login do usuário 
   async function signIn(email, password){
     setLoadingAuth(true);
 
+    // Chamada da função signInWithEmailAndPassword para realizar o login do usuário
     await signInWithEmailAndPassword(auth, email, password)
     .then( async (value) => {
       let uid = value.user.uid;
 
       const docRef = doc(db, "users", uid);
       const docSnap = await getDoc(docRef)
-
+      // Armazenar os dados do usuário no localStorage 
       let data = {
         uid: uid,
         nome: docSnap.data().nome,
@@ -70,16 +79,17 @@ function AuthProvider({ children }){
   async function signUp(email, password, name){
     setLoadingAuth(true);
 
+    // Chamada da função createUserWithEmailAndPassword para realizar o cadastro do usuário
     await createUserWithEmailAndPassword(auth, email, password)
     .then( async (value) => {
         let uid = value.user.uid
-
+        // Criação de um documento no Firestore para armazenar os dados do usuário
         await setDoc(doc(db, "users", uid), {
           name: name,
           avatarUrl: null
         })
         .then( () => {
-
+          // Armazenar os dados do usuário no localStorage
           let data = {
             uid: uid,
             name: name,
@@ -109,19 +119,26 @@ function AuthProvider({ children }){
 
   }
 
-
+  // Função para armazenar os dados do usuário no localStorage
   function storageUser(data){
     localStorage.setItem('@ticketsPRO', JSON.stringify(data))
   }
 
+  // Função para realizar o logout do usuário
   async function logout(){
     await signOut(auth);
     localStorage.removeItem('@ticketsPRO');
     setUser(null);
   }
 
-  return(
-    <AuthContext.Provider 
+  return (
+    /* O AuthContext.Provider é um componente que irá envolver toda a aplicação
+     para que todos os componentes tenham acesso ao contexto de autenticação 
+     Por isso, passamos o value com as informações de autenticação, como usuário
+      logado, funções de login, cadastro e logout, e informações de loading 
+      para que todos os componentes tenham acesso a essas informações
+    */
+     <AuthContext.Provider 
       value={{
         signed: !!user,
         user,

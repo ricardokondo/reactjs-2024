@@ -7,33 +7,17 @@ import { addDoc, collection } from "firebase/firestore";
 import { toast } from "react-toastify";
 
 function Customers() {
-  const [nome, setNome] = useState("");
-  const [cnpj, setCnpj] = useState("");
-  const [endereco, setEndereco] = useState("");
+  // Estados para armazenar os valores dos inputs
+  // Criar useState para armazenar os valores dos inputs
+  // do formulário que incluem nome, cnpj e endereço
 
+  /* TO DO dos useStates*/
+
+  // Função para cadastrar um cliente no banco de dados firestore do firebase 
   async function handleRegister(e) {
     e.preventDefault();
 
-    if (nome !== "" && cnpj !== "" && endereco !== "") {
-      // addDoc é um método do firebase que adiciona um documento a uma coleção no firestore
-      await addDoc(collection(db, "customers"), {
-        nome: nome,
-        cnpj: cnpj,
-        endereco: endereco,
-      })
-        .then(() => {
-          setNome("");
-          setCnpj("");
-          setEndereco("");
-          toast.success("Cliente cadastrado com sucesso!");
-        })
-        .catch((error) => {
-          console.log("Erro ao cadastrar o cliente: ", error);
-          toast.error("Erro ao cadastrar o cliente!");
-        });
-    } else {
-      toast.warn("Preencha todos os campos!");
-    }
+    // TO DO
   }
 
   return (
@@ -50,21 +34,21 @@ function Customers() {
               type="text"
               placeholder="Nome da empresa"
               value={nome}
-              onChange={(e) => setNome(e.target.value)}
+              onChange={/* TO DO */}
             />
             <label>CNPJ</label>
             <input
               type="text"
               placeholder="00.000.000/0001-00"
               value={cnpj}
-              onChange={(e) => setCnpj(e.target.value)}
+              onChange={/* TO DO */}
             />
             <label>Endereço</label>
             <input
               type="text"
               placeholder="Digite seu enderço"
               value={endereco}
-              onChange={(e) => setEndereco(e.target.value)}
+              onChange={/* TO DO */}
             />
             <button type="submit">Cadastrar</button>
           </form>

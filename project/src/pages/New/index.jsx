@@ -23,139 +23,81 @@ import { set } from "date-fns";
 
 const listRef = collection(db, "customers");
 
+// Função para registrar um novo chamado
 export default function New() {
   const { user } = useContext(AuthContext);
   const { id } = useParams();
   const navigate = useNavigate();
 
-  const [customers, setCustomers] = useState([]);
-  const [loadCustomer, setLoadCustomer] = useState(true);
-  const [customerSelected, setCustomerSelected] = useState(0);
-  const [idCustomer, setIdCustomer] = useState(false);
-
-  const [complemento, setComplemento] = useState("");
-  const [assunto, setAssunto] = useState("Suporte");
-  const [status, setStatus] = useState("Aberto");
+  /* Estados para armazenar os valores dos inputs 
+  * Criar useState para armazenar os valores dos inputs
+  * do formulário que incluem customers, loadCustomer, customerSelected,
+  * idCustomer, complemento, assunto e status 
+  */
 
   useEffect(() => {
+    // Função para carregar os clientes
     async function loadCustomers() {
-      const querySnapshot = await getDocs(listRef)
-        .then((snapshot) => {
-          let lista = [];
 
-          snapshot.forEach((doc) => {
-            lista.push({
-              id: doc.id,
-              nome: doc.data().nome,
-            });
-          });
-
-          if (snapshot.docs.size === 0) {
-            console.log("NENHUMA EMPRESA ENCONTRADA");
-            toast.error(
-              "Nenhuma empresa encontrada, adicione uma empresa para registrar um chamado!"
-            );
-            setCustomers([{ id: "1", nome: "FREELA" }]);
-            setLoadCustomer(false);
-            return;
-          }
-
-          setCustomers(lista);
-          setLoadCustomer(false);
-
-          if (id) {
-            loadId(lista);
-          }
-        })
-        .catch((error) => {
-          console.log("ERRRO AO BUSCAR OS CLIENTES", error);
-          toast.error("Ops, algo deu errado ao buscar os clientes!");
-          setLoadCustomer(false);
-          setCustomers([{ id: "1", nome: "FREELA" }]);
-        });
+      /* TO DO 
+      * Criar uma constante querySnapshot que recebe a função getDocs com o parâmetro listRef
+      * Criar uma lista vazia
+      * Criar um forEach para percorrer os documentos do snapshot
+      * Adicionar um objeto com id e nome do documento na lista
+      * Verificar se o tamanho dos documentos é igual a 0
+      * Se for igual a 0, exibir um console.log e uma mensagem de erro
+      * Se for diferente de 0, setar os clientes e o loadCustomer como false
+      * Verificar se o id existe
+      * Se existir, chamar a função loadId com a lista
+      * Se não existir, não fazer nada
+      * Adicionar um catch para exibir um console.log e uma mensagem de erro
+      * Setar o loadCustomer como false e os clientes como um objeto com id 1 e nome FREELA
+      * 
+      */
     }
-
+    // Chamar a função loadCustomers
     loadCustomers();
   }, [id]);
 
+  // Função para carregar o chamado pelo id
   async function loadId(lista) {
-    await getDoc(doc(db, "chamados", id))
-      .then((snapshot) => {
-        setAssunto(snapshot.data().assunto);
-        setStatus(snapshot.data().status);
-        setComplemento(snapshot.data().complemento);
 
-        let index = lista.findIndex(
-          (item) => item.id === snapshot.data().clienteId
-        );
-        setCustomerSelected(index);
-        setIdCustomer(true);
-      })
-      .catch((error) => {
-        setLoadCustomer(false);
-        console.log("ERRO AO BUSCAR O CHAMADO", error);
-        toast.error("Ops, algo deu errado ao buscar o chamado!");
-      });
+    /**
+     * TO DO
+     * Chamada do método getDoc para buscar o chamado pelo id e setar os valores
+     * dos estados assunto, status, complemento
+     */
+
   }
 
+  // Função para atualizar o chamado
   function handleOptionChange(e) {
-    setStatus(e.target.value);
+    /* TO DO */
   }
 
+  // Função para atualizar o chamado
   function handleChangeSelect(e) {
-    setAssunto(e.target.value);
+    /* TO DO */
   }
 
+  // Função para atualizar o chamado
   function handleChangeCustomer(e) {
-    setCustomerSelected(e.target.value);
-    console.log(customers[e.target.value].nome);
+    /* TO DO */
   }
 
+  // Função para registrar um chamado
   async function handleRegister(e) {
     e.preventDefault();
-
+    // Verificar se o id do cliente foi selecionado
     if (idCustomer) {
-      await updateDoc(doc(db, "chamados", id), {
-        cliente: customers[customerSelected].nome,
-        clienteId: customers[customerSelected].id,
-        assunto: assunto,
-        complemento: complemento,
-        status: status,
-        userId: user.uid,
-      })
-        .then(() => {
-          toast.info("Chamado atualizado!");
-          setComplemento("");
-          setCustomerSelected(0);
-          navigate("/dashboard");
-        })
-        .catch((error) => {
-          toast.error("Ops erro ao atualizar, tente mais tarde!");
-          console.log(error);
-        });
-
-      return;
+      // Verificar se o assunto foi preenchido e o status foi selecionado 
+      /* TO DO */
     }
 
     //Registrar um chamado
-    await addDoc(collection(db, "chamados"), {
-      created: new Date(),
-      cliente: customers[customerSelected].nome,
-      clienteId: customers[customerSelected].id,
-      assunto: assunto,
-      complemento: complemento,
-      status: status,
-      userId: user.uid,
-    })
-      .then(() => {
-        toast.success("Chamado registrado!");
-        setComplemento("");
-        setCustomerSelected(0);
-      })
-      .catch((error) => {
-        toast.error("Ops erro ao registrar, tente mais tarde!");
-        console.log(error);
-      });
+    // Adicionar um documento na coleção chamados com os valores do chamado 
+    /* TO DO */
+
   }
 
   return (

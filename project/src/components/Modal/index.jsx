@@ -1,7 +1,9 @@
 import "./modal.css";
 import { FiX } from "react-icons/fi";
 
-function Modal({ conteudo, close }) {
+/* Nesta função são passados os valores que serão utilizados no modal, como 
+o conteúdo e a função close que fecha o modal */
+function Modal({ }) {
   return (
     <div className="modal">
       <div className="container">
@@ -16,18 +18,18 @@ function Modal({ conteudo, close }) {
           <div className="row">
             <span>
               Cliente:
-              <i>{conteudo.cliente}</i>
+              <i>Nome do Cliente</i>
             </span>
           </div>
 
           <div className="row">
             <span>
               Assunto:
-              <i>{conteudo.assunto}</i>
+              <i>Descreva aqui o seu assunto</i>
             </span>
             <span>
               Cadastrado em:
-              <i>{conteudo.createdFormat}</i>
+              <i>Data de cadastrp</i>
             </span>
           </div>
 
@@ -45,18 +47,18 @@ function Modal({ conteudo, close }) {
                       : "#5bc0de",
                 }}
               >
-                {conteudo.status}
+                Status
               </i>
             </span>
           </div>
-          {conteudo.complemento !== "" && (
+        
             <div className="row">
               <span>
                 Complemento:
-                <i>{conteudo.complemento}</i>
+                <i>Neste campo é descrito o complemento</i>
               </span>
             </div>
-          )}
+          
         </main>
       </div>
     </div>
