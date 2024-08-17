@@ -23,4 +23,7 @@ dist-ssr
 *.sln
 *.sw?
 
+project/src/services/firebaseConnection.jsx
 src/firebaseConnection.jsx
+
+src/services/firebaseConnection.jsx
