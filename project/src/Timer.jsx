@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 function Timer() {
   const [seconds, setSeconds] = useState(0);
 
-    useEffect(() => {
+useEffect(() => {
       // O setInterval é configurado dentro do useEffect para aumentar os segundos a cada segundo
     const interval = setInterval(() => {
       setSeconds(prevSeconds => prevSeconds + 1);
